@@ -10,7 +10,7 @@ endif()
 include("${CMAKE_CURRENT_LIST_DIR}/utilities/polly_init.cmake")
 
 polly_init(
-    "Visual Studio 16 2019 Win64"
+    "Visual Studio 16 2019"
     "Visual Studio 16 2019"
 )
 
