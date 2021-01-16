@@ -14,7 +14,7 @@ polly_init(
     "clang / c++17 support"
     "Unix Makefiles"
 )
-
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -pthread " CACHE STRING "")
 include("${CMAKE_CURRENT_LIST_DIR}/utilities/polly_common.cmake")
 
 include("${CMAKE_CURRENT_LIST_DIR}/compiler/clang.cmake")
