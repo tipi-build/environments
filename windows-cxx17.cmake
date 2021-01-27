@@ -19,7 +19,7 @@ add_compile_definitions(
     WIN32_LEAN_AND_MEAN
     _WIN32_WINNT=0x0A00 
 )
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -pthread -femulated-tls " CACHE STRING "")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -femulated-tls " CACHE STRING "")
 include("${CMAKE_CURRENT_LIST_DIR}/utilities/polly_common.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/compiler/clang.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/flags/cxx17.cmake")
