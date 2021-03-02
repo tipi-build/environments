@@ -19,6 +19,7 @@ if(MINGW)
 add_compile_definitions(
     WIN32_LEAN_AND_MEAN
     _WIN32_WINNT=0x0A00 
+    __kernel_entry
 	  BOOST_USE_WINDOWS_H
 )
 else()
