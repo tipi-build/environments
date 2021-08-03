@@ -1,18 +1,13 @@
-### Polly
+### Polly : tipi.build's flavour
+Collection of CMake toolchain files and their related environment.
 
-[![Join the chat at https://gitter.im/polly-cmake/Lobby](https://badges.gitter.im/polly-cmake/Lobby.svg)](https://gitter.im/polly-cmake/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+#### tipi.build environments
+A tipi.build environment is made of a `build image + test image + toolchain definition`
 
-Collection of CMake toolchain files and scripts.
-
-| Linux/OSX                                       | Windows                                             |
-|-------------------------------------------------|-----------------------------------------------------|
-| [![Build Status][travis_status]][travis_builds] | [![Build Status][appveyor_status]][appveyor_builds] |
-
-[travis_status]: https://travis-ci.org/ruslo/polly.svg?branch=master
-[travis_builds]: https://travis-ci.org/ruslo/polly/builds
-
-[appveyor_status]: https://ci.appveyor.com/api/projects/status/8x6thwc05mhvdxmo?svg=true
-[appveyor_builds]: https://ci.appveyor.com/project/ruslo/polly/history
+Hence when `tipi build --toolchain linux-gcc-armhf` is run:
+1. tipi pulls the build image, which is a linux x86 system with a cross-compiler for arm
+2. tipi uses the CMake toolchain file to configure the compiler in the build image
+3. tipi starts a test system with the `.run` image ( when none present it uses the build image to run the tests )
 
 Every toolchain defines compiler/flags and two variables:
 * `POLLY_TOOLCHAIN_NAME`
