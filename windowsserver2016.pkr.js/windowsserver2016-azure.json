@@ -1,0 +1,81 @@
+{
+    "variables": {
+        "client_id": "{{env `ARM_CLIENT_ID`}}",
+        "client_secret": "{{env `ARM_CLIENT_SECRET`}}",
+        "subscription_id": "{{env `ARM_SUBSCRIPTION_ID`}}",
+        "tenant_id": "{{env `ARM_TENANT_ID`}}",
+        "resource_group": "{{env `ARM_RESOURCE_GROUP`}}",
+        "build_resource_group": "{{env `ARM_BUILD_RESOURCE_GROUP`}}",
+        "image_name": "{{env `ARM_IMAGE_NAME`}}"
+    },
+    "sensitive-variables": [
+        "install_password",
+        "client_secret"
+    ],
+    "builders": [
+        {
+            "name": "azure",
+            "type": "azure-arm",
+            "client_id": "{{user `client_id`}}",
+            "client_secret": "{{user `client_secret`}}",
+            "subscription_id": "{{user `subscription_id`}}",
+            "tenant_id": "{{user `tenant_id`}}",
+            "managed_image_resource_group_name": "{{user `resource_group`}}",
+            "build_resource_group_name": "{{user `build_resource_group`}}",
+            "os_type": "Windows",
+            "managed_image_name": "{{user `image_name`}}",
+            "vm_size": "Standard_D4d_v4",            
+            "image_publisher": "MicrosoftWindowsServer",
+            "image_offer": "WindowsServer",
+            "image_sku": "2016-Datacenter",
+            "communicator": "winrm",
+            "winrm_use_ssl": true,
+            "winrm_insecure": true,
+            "winrm_timeout": "5m",
+            "winrm_username": "packer",
+            "azure_tags": {
+                "dept": "Engineering",
+                "task": "Image deployment"
+            }
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "file",
+            "source": "scripts/runtime/sync-tipi-distro.ps1",
+            "destination": "c:\\Temp\\sync-tipi-distro.ps1"
+        },
+        {
+            "type": "powershell",
+            "elevated_user": "packer",
+            "elevated_password": "{{.WinRMPassword}}",
+            "scripts": [
+                "scripts/disable-windows-update.ps1",
+                "scripts/disable-windows-defender.ps1",
+                "scripts/fix-tls.ps1",
+                "scripts/update-root-certificate-store.ps1",
+                "scripts/install-nuget.ps1",
+                "scripts/install-openssh.ps1",
+                "scripts/install-vcredist.ps1"
+            ]
+        },
+        {
+            "type": "windows-restart"
+        },
+        {
+            "type": "powershell",
+            "elevated_user": "packer",
+            "elevated_password": "{{.WinRMPassword}}",
+            "scripts": [
+                "scripts/install-tipi.ps1"
+            ]
+        },
+        {
+            "type": "powershell",
+            "inline": [
+                "& $env:SystemRoot\\System32\\Sysprep\\Sysprep.exe /oobe /generalize /quiet /quit",
+                "while($true) { $imageState = Get-ItemProperty HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Setup\\State | Select ImageState; if($imageState.ImageState -ne 'IMAGE_STATE_GENERALIZE_RESEAL_TO_OOBE') { Write-Output $imageState.ImageState; Start-Sleep -s 10  } else { break } }"
+            ]
+        }
+    ]
+}
