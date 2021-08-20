@@ -3,13 +3,8 @@
   "builders": [
     {
       "type": "docker",
-      "image": "tipibuild/tipi-ubuntu",
-      "commit": true,
-      "changes": [
-        "RUN apt install openssh-server",
-        "RUN service ssh start"
-        "EXPOSE 22"
-      ]
+      "image": "tipibuild/tipi-ubuntu-staging-326",
+      "commit": true
     }
   ],
   "post-processors": [
