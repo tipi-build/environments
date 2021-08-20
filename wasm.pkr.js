@@ -3,11 +3,16 @@
   "builders": [
     {
       "type": "docker",
-      "image": "nxxm/tipi-ubuntu-staging-275",
-      "commit": true,
-      "changes": [
-        "EXPOSE 22"
-      ]
+      "image": "tipibuild/tipi-ubuntu-staging-326",
+      "commit": true
+    }
+  ],
+  "post-processors": [
+    { 
+      "type": "docker-tag",
+      "repository": "wasm",
+      "tag": "latest"
     }
   ]
+
 }
