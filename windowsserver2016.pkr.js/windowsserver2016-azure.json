@@ -24,14 +24,14 @@
             "build_resource_group_name": "{{user `build_resource_group`}}",
             "os_type": "Windows",
             "managed_image_name": "{{user `image_name`}}",
-            "vm_size": "Standard_D4d_v4",            
+            "vm_size": "Standard_D8d_v4",            
             "image_publisher": "MicrosoftWindowsServer",
             "image_offer": "WindowsServer",
             "image_sku": "2016-Datacenter",
             "communicator": "winrm",
             "winrm_use_ssl": true,
             "winrm_insecure": true,
-            "winrm_timeout": "5m",
+            "winrm_timeout": "30m",
             "winrm_username": "packer",
             "azure_tags": {
                 "dept": "Engineering",
@@ -46,6 +46,11 @@
             "destination": "c:\\Temp\\sync-tipi-distro.ps1"
         },
         {
+            "type": "file",
+            "source": "scripts/runtime/helpers.ps1",
+            "destination": "c:\\Temp\\helpers.ps1"
+        },
+        {
             "type": "powershell",
             "elevated_user": "packer",
             "elevated_password": "{{.WinRMPassword}}",
@@ -56,6 +61,8 @@
                 "scripts/update-root-certificate-store.ps1",
                 "scripts/install-nuget.ps1",
                 "scripts/install-openssh.ps1",
+                "scripts/install-git.ps1",
+                "scripts/install-vs.ps1",
                 "scripts/install-vcredist.ps1"
             ]
         },
