@@ -1,13 +1,18 @@
 {
     "variables": {
-        "client_id": "{{env `ARM_CLIENT_ID`}}",
-        "client_secret": "{{env `ARM_CLIENT_SECRET`}}",
-        "subscription_id": "{{env `ARM_SUBSCRIPTION_ID`}}",
-        "tenant_id": "{{env `ARM_TENANT_ID`}}",
-        "resource_group": "{{env `ARM_RESOURCE_GROUP`}}",
-        "build_resource_group": "{{env `ARM_BUILD_RESOURCE_GROUP`}}",
-        "image_name": "{{env `ARM_IMAGE_NAME`}}"
+        "client_id": "{{client_id}}",
+        "client_secret": "{{client_secret}}",
+        "subscription_id": "{{subscription_id}}",
+        "tenant_id": "{{tenant_id}}",
+        "resource_group": "{{resource_group_name}}",
+        "build_resource_group": "{{build_resource_group_name}}",
+        "image_name": "{{output_image_name}}",
+        "shared_image_gallery_resource_group": "tipi-images",
+        "shared_image_gallery_name": "tipi_image_gallery",
+        "shared_image_gallery_image_version": "0.0.1"
     },
+    {{! Changing the mustache delimiters to <% ... %> in order to preserve function of the packer-templating which uses curlies as well }}
+    {{=<% %>=}}
     "sensitive-variables": [
         "install_password",
         "client_secret"
@@ -33,6 +38,16 @@
             "winrm_insecure": true,
             "winrm_timeout": "30m",
             "winrm_username": "packer",
+            "shared_image_gallery_destination": {
+                "resource_group": "{{user `shared_image_gallery_resource_group`}}",
+                "gallery_name": "{{user `shared_image_gallery_name`}}",
+                "image_name": "{{user `image_name`}}",
+                "image_version": "{{user `shared_image_gallery_image_version`}}",
+                "replication_regions": ["Central US", "East US", "North Europe", "West Europe"],
+                "storage_account_type": "Standard_LRS"
+            },
+            "shared_image_gallery_timeout": "1h30m",
+            "shared_image_gallery_replica_count": 1,
             "azure_tags": {
                 "dept": "Engineering",
                 "task": "Image deployment"
@@ -42,12 +57,12 @@
     "provisioners": [
         {
             "type": "file",
-            "source": "scripts/runtime/sync-tipi-distro.ps1",
+            "source": "./scripts/runtime/sync-tipi-distro.ps1",
             "destination": "c:\\Temp\\sync-tipi-distro.ps1"
         },
         {
             "type": "file",
-            "source": "scripts/runtime/helpers.ps1",
+            "source": "./scripts/runtime/helpers.ps1",
             "destination": "c:\\Temp\\helpers.ps1"
         },
         {
@@ -55,15 +70,15 @@
             "elevated_user": "packer",
             "elevated_password": "{{.WinRMPassword}}",
             "scripts": [
-                "scripts/disable-windows-update.ps1",
-                "scripts/disable-windows-defender.ps1",
-                "scripts/fix-tls.ps1",
-                "scripts/update-root-certificate-store.ps1",
-                "scripts/install-nuget.ps1",
-                "scripts/install-openssh.ps1",
-                "scripts/install-git.ps1",
-                "scripts/install-vs.ps1",
-                "scripts/install-vcredist.ps1"
+                "./scripts/disable-windows-update.ps1",
+                "./scripts/disable-windows-defender.ps1",
+                "./scripts/fix-tls.ps1",
+                "./scripts/update-root-certificate-store.ps1",
+                "./scripts/install-nuget.ps1",
+                "./scripts/install-openssh.ps1",
+                "./scripts/install-git.ps1",
+                "./scripts/install-vcredist.ps1",
+                "./scripts/install-vs.ps1"
             ]
         },
         {
@@ -74,7 +89,7 @@
             "elevated_user": "packer",
             "elevated_password": "{{.WinRMPassword}}",
             "scripts": [
-                "scripts/install-tipi.ps1"
+                "./scripts/install-tipi.ps1"
             ]
         },
         {
