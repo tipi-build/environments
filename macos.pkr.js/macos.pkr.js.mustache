@@ -1,0 +1,46 @@
+{
+  "variables": {
+    "password" :"{{ssh_password}}", 
+    "vm_name": "{{vm_name}}",
+    "target_snapshot":"{{target_snapshot}}"
+  },
+
+  {{! Changing the mustache delimiters to <% ... %> in order to preserve function of the packer-templating which uses curlies as well }}
+  {{=<% %>=}}
+
+  ,"sensitive-variables": ["password","vm_name"]
+
+
+
+  ,"builders": [
+    {
+      "name": "virtualbox",
+      "type": "virtualbox-vm",
+      "vm_name": "{{user `vm_name`}}",
+      "attach_snapshot":"base_snapshot",
+      "boot_wait": "90s",
+      "target_snapshot":"{{user `target_snapshot`}}",
+      "skip_export": 1,
+      "ssh_username": "tipibuild",
+      "ssh_password": "{{user `password`}}",
+      "ssh_pty": "true",
+      "shutdown_command": "echo '{{user `password`}}' | sudo -E -S shutdown -h now",
+      "ssh_wait_timeout": "40m",
+      "headless": 0,
+      "ssh_timeout":"3m"
+    }
+  ]
+  
+  ,"provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "echo '{{user `password`}}' | sudo -E -S pwd",
+        "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/tipi-build/cli/feature/release-v0.0.16/install/install_for_macos_linux.sh)\""
+      ]
+    }
+  ]
+}
+
+
+
