@@ -10,7 +10,7 @@
   "post-processors": [
     { 
       "type": "docker-tag",
-      "repository": "wasm",
+      "repository": "linux",
       "tag": "latest"
     }
   ]
