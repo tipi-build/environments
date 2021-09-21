@@ -36,11 +36,18 @@
       "type": "shell",
       "inline": [
         "echo '{{user `password`}}' | sudo -E -S pwd",
+        "sudo sh -c 'echo \"PermitUserEnvironment yes\" >> /etc/ssh/sshd_config'",
+        "mkdir -p ~/.ssh/",
+        "echo \"PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin\" >> ~/.ssh/environment",
         "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/tipi-build/cli/feature/release-v0.0.16/install/install_for_macos_linux.sh)\""
       ]
     }
   ]
 }
+
+
+
+
 
 
 
