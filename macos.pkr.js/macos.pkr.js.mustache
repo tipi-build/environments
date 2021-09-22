@@ -40,9 +40,11 @@
         "sudo sh -c 'echo \"PermitRootLogin yes\" >> /etc/ssh/sshd_config'",
         "sudo /usr/bin/dscl . -passwd /Users/root '{{user `password`}}'",
         "sudo mkdir -p /var/root/.ssh/",
+        "sudo mkdir -p /var/root/.tipi/",
         "sudo sh -c 'echo \"PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin\" >> /var/root/.ssh/environment'",
         "export TIPI_HOME_DIR=/var/root/.tipi",
-        "sudo -E /bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/tipi-build/cli/feature/release-v0.0.16/install/install_for_macos_linux.sh)\""
+        "sudo chown -R tipibuild /var/root/",
+        "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/tipi-build/cli/feature/release-v0.0.16/install/install_for_macos_linux.sh)\""
       ]
     }
   ]
