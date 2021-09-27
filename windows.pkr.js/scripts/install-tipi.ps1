@@ -27,7 +27,7 @@ Try {
     icacls $provisioningTimeTarget /grant Users:F
 
     # install tipi
-    . { iwr -useb https://raw.githubusercontent.com/tipi-build/cli/feature/verbose-install/install/install_for_windows.ps1 } | iex
+    . { iwr -useb https://raw.githubusercontent.com/tipi-build/cli/master/install/install_for_windows.ps1 } | iex
 
     # set the TIPI_HOME_DIR to our runtime target directory and setup file-sync
     [System.Environment]::SetEnvironmentVariable('TIPI_HOME_DIR', $runtimeTimeTarget, [System.EnvironmentVariableTarget]::Machine)
