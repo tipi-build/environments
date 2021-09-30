@@ -56,25 +56,18 @@ $strongKeyExchanges = @(
 )
 
 $cipherOrder = @(
-  'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P521',
-  'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P384',
-  'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256',
-  'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA_P521',
-  'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA_P384',
-  'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA_P256',
-  'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P521',
-  'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P384',
-  'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256',
-  'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA_P521',
-  'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA_P384',
-  'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA_P256',
-  'TLS_RSA_WITH_AES_256_GCM_SHA384',
-  'TLS_RSA_WITH_AES_128_GCM_SHA256',
-  'TLS_RSA_WITH_AES_256_CBC_SHA256',
-  'TLS_RSA_WITH_AES_256_CBC_SHA',
-  'TLS_RSA_WITH_AES_128_CBC_SHA256',
-  'TLS_RSA_WITH_AES_128_CBC_SHA',
-  'TLS_RSA_WITH_3DES_EDE_CBC_SHA'
+  'TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384',
+  'TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384',
+  'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256',
+  'TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256',
+  'TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384',
+  'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384',
+  'TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256',
+  'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256',
+  'TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA',
+  'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA',
+  'TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA',
+  'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA'
 )
 
 # Reset the protocols key
@@ -147,5 +140,16 @@ Foreach ($keyExchange in $strongKeyExchanges) {
 # Set cipher order
 $cipherOrderString = [string]::join(',', $cipherOrder)
 New-ItemProperty -path 'HKLM:\SOFTWARE\Policies\Microsoft\Cryptography\Configuration\SSL\00010002' -name 'Functions' -value $cipherOrderString -PropertyType 'String' -Force | Out-Null
+
+# add ssl/tls default policy in the system's powershell profile
+
+$systemPS_ProfilePath = "$PSHOME\Profile.ps1"
+
+if (!(Test-Path -Path $systemPS_ProfilePath)) {
+  New-Item -ItemType File -Path $systemPS_ProfilePath -Force
+}
+
+Write-Output '[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12' > $systemPS_ProfilePath 
+
 
 Write-Output "TLS hardened."
