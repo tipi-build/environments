@@ -70,14 +70,14 @@
             "elevated_user": "packer",
             "elevated_password": "{{.WinRMPassword}}",
             "scripts": [
-                "./scripts/disable-windows-update.ps1",
-                "./scripts/disable-windows-defender.ps1",
                 "./scripts/fix-tls.ps1",
                 "./scripts/update-root-certificate-store.ps1",
                 "./scripts/install-nuget.ps1",
                 "./scripts/install-openssh.ps1",
                 "./scripts/install-git.ps1",
                 "./scripts/install-vcredist.ps1"
+                "./scripts/disable-windows-update.ps1",
+                "./scripts/disable-windows-defender.ps1"
             ]
         },
         {
