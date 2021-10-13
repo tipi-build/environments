@@ -44,6 +44,7 @@
         "sudo sh -c 'echo \"PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin\" >> /var/root/.ssh/environment'",
         "export TIPI_HOME_DIR=/var/root/.tipi",
         "sudo chown -R tipibuild /var/root/",
+        "export TIPI_DISTRO_MODE=all",
         "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/tipi-build/cli/master/install/install_for_macos_linux.sh)\""
       ]
     }

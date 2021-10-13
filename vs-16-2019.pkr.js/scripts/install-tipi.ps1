@@ -15,12 +15,14 @@ Try {
     # and runtime, hence we want to copy over to the final location POST-boot
     $provisioningTimeTarget = "C:\.tipi"
     $runtimeTimeTarget = "D:\.tipi"
+    $distro_mode = "all"
 
     Write-Output "Installing tipi in: "
     Write-Output $provisioningTimeTarget
 
     # set the TIPI_HOME_DIR during privisioning
     $env:TIPI_HOME_DIR = $provisioningTimeTarget
+    $env:TIPI_DISTRO_MODE = $distro_mode
 
     # have the target folder created and read/writable for everyone
     md $provisioningTimeTarget
