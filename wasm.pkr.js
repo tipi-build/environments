@@ -14,5 +14,7 @@
       "tag": "latest"
     }
   ]
+  ,"_tipi_version":"{{tipi_version_hash}}"
+
 
 }
