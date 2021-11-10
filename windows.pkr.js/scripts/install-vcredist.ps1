@@ -9,13 +9,18 @@ if (!$RunningAsAdmin) {
 
 # Force TLS1.2
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-
 Try {
+
+    $tmpPath = "C:\Temp\VcRedist"
+    New-Item -ItemType Directory -Force -Path $tmpPath
+
     Install-Module -Name VcRedist -Force -Confirm:$False
-    md C:\Temp\VcRedist
+    $redistList = Get-VcList | Get-VcRedist -Path $tmpPath    
     
-    Save-VcRedist -VcList (Get-VcList -Release 2010, 2013, 2019) -Path C:\Temp\VcRedist
-    Install-VcRedist -Path C:\Temp\VcRedist -VcList (Get-VcList) -Silent
+    Install-VcRedist -Path $tmpPath -VcList $redistList -Silent
+
+    Remove-Item -Recurse -Force $tmpPath
+
 } Catch {
     Write-Error "Failed to install vc redist runtimes."
     $host.SetShouldExit(-1)

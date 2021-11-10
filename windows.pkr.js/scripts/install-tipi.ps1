@@ -17,7 +17,6 @@ Try {
     $runtimeTimeTarget = "D:\.tipi"
     $distro_mode = "all"
 
-
     Write-Output "Installing tipi in: "
     Write-Output $provisioningTimeTarget
 
@@ -43,7 +42,8 @@ Try {
     $taskSettings = New-ScheduledTaskSettingsSet -Priority $taskPriority
     Register-ScheduledTask -TaskName "tipi-distro-sync" -Trigger $taskTrigger -User $taskUser -Action $taskAction -Settings $taskSettings -RunLevel Highest -Force
 
-    #schtasks /create /tn " /sc onstart /delay 0000:10 /rl highest /ru system /tr "powershell.exe -file c:\Temp\sync-tipi-distro.ps1"
+    # clean up the download folder to have less clutter
+    Remove-Item -Recurse -Force "$provisioningTimeTarget\downloads\*"
 
 } Catch {
     Write-Error "Failed to install tipicli :'("
