@@ -45,7 +45,7 @@
         "export TIPI_HOME_DIR=/var/root/.tipi",
         "sudo chown -R tipibuild /var/root/",
         "export TIPI_DISTRO_MODE=all",
-        "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/tipi-build/cli/master/install/install_for_macos_linux.sh)\""
+        "bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/tipi-build/cli/master/install/install_for_macos_linux.sh)\" && /bin/bash -c \"chmod +x install_tipi.sh && ./install.sh {{tipi_version_excutable}} && rm install_tipi.sh\""
       ]
     }
   ]
