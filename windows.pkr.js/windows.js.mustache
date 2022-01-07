@@ -87,7 +87,8 @@
             "type": "powershell",
             "elevated_user": "packer",
             "elevated_password": "{{.WinRMPassword}}",
-            "scripts": [
+            ,"environment_vars": ["TIPI_INSTALL_VERSION={{tipi_cli_version}}"]
+            ,"scripts": [
                 "./scripts/install-tipi.ps1"
             ]
         },
