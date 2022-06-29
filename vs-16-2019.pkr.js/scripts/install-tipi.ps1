@@ -23,6 +23,11 @@ Try {
     # set the TIPI_HOME_DIR during privisioning
     $env:TIPI_HOME_DIR = $provisioningTimeTarget
     $env:TIPI_DISTRO_MODE = $distro_mode
+    
+    # do a system install because otherwise it's the image-creation user who'll get tipi 
+    # installe in his user profile & PATH... which will be deleted on imaging completion
+    # which would result in the tipi.build customer not having a working installation
+    $env:TIPI_INSTALL_SYSTEM = "True"
 
     # have the target folder created and read/writable for everyone
     md $provisioningTimeTarget
