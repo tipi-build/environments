@@ -10,11 +10,9 @@
   "post-processors": [
     { 
       "type": "docker-tag",
-      "repository": "linux-ubuntu1604",
+      "repository": "linux-ubuntu-16.04",
       "tag": "latest"
     }
   ]
   ,"_tipi_version":"{{tipi_version_hash}}"
-
-
 }
