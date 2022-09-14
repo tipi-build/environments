@@ -45,11 +45,13 @@ Install-Binary  -Url $downloadUrl `
 # Disable GCM machine-wide
 [Environment]::SetEnvironmentVariable("GCM_INTERACTIVE", "Never", [System.EnvironmentVariableTarget]::Machine)
 
-Add-MachinePathItem "C:\Program Files\Git\bin"
+# add git bin dir to machine path
+$context = [EnvironmentVariableTarget]::Machine
+$PATH_orig = [Environment]::GetEnvironmentVariable("Path", $context)
 
-if (((Get-CimInstance -ClassName Win32_OperatingSystem).Caption) -match "2016") {
-    $env:Path += ";$env:ProgramFiles\Git\usr\bin\"
-}
+$PATH_new = "C:\Program Files\Git\bin;" + $PATH_orig    # prepending so the latest install wins the path race
+$PATH_new = $PATH_new -replace ';{2,}',';'              # clean the path of eventual double ;; entries
+[Environment]::SetEnvironmentVariable("Path", $PATH_new, $context)
 
 # Add well-known SSH host keys to ssh_known_hosts
 ssh-keyscan -t rsa github.com >> "C:\Program Files\Git\etc\ssh\ssh_known_hosts"
