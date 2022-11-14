@@ -23,6 +23,7 @@ Try {
     # set the TIPI_HOME_DIR during privisioning
     $env:TIPI_HOME_DIR = $provisioningTimeTarget
     $env:TIPI_DISTRO_MODE = $distro_mode
+    $env:TIPI_INSTALL_SYSTEM = "True"
 
     # have the target folder created and read/writable for everyone
     md $provisioningTimeTarget
