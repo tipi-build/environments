@@ -23,7 +23,7 @@ else()
 endif()
 
 polly_init(
-        "Make / Visual Studio 2022 / GOMA / x64"
+        "Make / Visual Studio 2022 / x64"
         "Unix Makefiles"
 )
 
