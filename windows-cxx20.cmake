@@ -12,7 +12,7 @@ include("${CMAKE_CURRENT_LIST_DIR}/utilities/polly_init.cmake")
 
 polly_init(
     "clang / c++20 support"
-    "MinGW Makefiles"
+    "Ninja"
 )
 
 add_compile_definitions(

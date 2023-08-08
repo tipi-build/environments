@@ -24,7 +24,7 @@ endif()
 
 polly_init(
         "Make / Visual Studio 2022 / x64"
-        "Unix Makefiles"
+        "Ninja"
 )
 
 SET(CMAKE_CXX_FLAGS_DEBUG "/Ob0 /Od /RTC1" CACHE STRING "")
