@@ -99,13 +99,14 @@ function Get-VisualStudioComponents {
 
 $workLoads = @(
 	"--add Microsoft.VisualStudio.Workload.VCTools"
+    "--add Microsoft.VisualStudio.Workload.NativeDesktop"
 	"--includeOptional"
 	"--includeRecommended"
 	"--remove Component.CPython3.x64"
 )
 $workLoadsArgument = [String]::Join(" ", $workLoads)
 		
-$releaseInPath = "Enterprise"
+$releaseInPath = "BuildTools"
 $subVersion =  "17"
 $bootstrapperUrl = "https://aka.ms/vs/${subVersion}/release/vs_${releaseInPath}.exe"
 
