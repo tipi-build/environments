@@ -23,7 +23,7 @@ else()
 endif()
 
 polly_init(
-        "Make / Visual Studio 2022 / x64"
+        "Ninja / Visual Studio 2022 / x64"
         "Ninja"
 )
 
