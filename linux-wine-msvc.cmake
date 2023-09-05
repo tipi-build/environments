@@ -29,6 +29,9 @@ polly_init(
 
 SET(CMAKE_CXX_FLAGS_DEBUG "/Ob0 /Od /RTC1" CACHE STRING "")
 
+# can be troublesome for some builds that do not respect that flag, unexpected on "windows"
+set(CMAKE_DEBUG_POSTFIX "")
+
 # inject "system include/lib" information from tipi's MSVC-wine environments
 set(CMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES $ENV{TIPI_MSVC_WINE__LINUX__INCLUDE})
 link_directories($ENV{TIPI_MSVC_WINE__LINUX__LIB})
