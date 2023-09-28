@@ -3,7 +3,7 @@
   "builders": [
     {
       "type": "docker",
-      "image": "tipibuild/tipi-ubuntu:{{tipi_cli_version}}",
+      "image": "tipibuild/tipi-ubuntu-staging-1188:latest",
       "commit": true
     }
   ],
