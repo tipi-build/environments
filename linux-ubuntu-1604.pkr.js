@@ -10,7 +10,7 @@
   "post-processors": [
     { 
       "type": "docker-tag",
-      "repository": "linux-ubuntu-16.04",
+      "repository": "linux-ubuntu-1604",
       "tag": "latest"
     }
   ]
