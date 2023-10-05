@@ -1,0 +1,2 @@
+include("${CMAKE_CURRENT_LIST_DIR}/linux-cxx17.cmake")
+set(SANITIZE_UNDEFINED TRUE CACHE BOOL "" FORCE)
