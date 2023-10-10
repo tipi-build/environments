@@ -12,7 +12,7 @@ include("${CMAKE_CURRENT_LIST_DIR}/utilities/polly_init.cmake")
 
 polly_init(
     "clang / c++17 support"
-    "Unix Makefiles"
+    "Ninja"
 )
 
 include("${CMAKE_CURRENT_LIST_DIR}/utilities/polly_common.cmake")

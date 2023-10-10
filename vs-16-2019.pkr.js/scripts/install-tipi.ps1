@@ -11,44 +11,45 @@ if (!$RunningAsAdmin) {
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 Try {
-    # the *temporary* storage is not persisted between provisioning
-    # and runtime, hence we want to copy over to the final location POST-boot
-    $provisioningTimeTarget = "C:\.tipi"
-    $runtimeTimeTarget = "D:\.tipi"
-    $distro_mode = "all"
+  # force distro mode all so we have all the requisite tools preinstalled
+  $env:TIPI_DISTRO_MODE = "all"
+  Write-Output "Installing tipi in distro mode '$env:TIPI_DISTRO_MODE'"
 
-    Write-Output "Installing tipi in: "
-    Write-Output $provisioningTimeTarget
+  # do a system install because otherwise it's the image-creation user who'll get tipi 
+  # installe in his user profile & PATH... which will be deleted on imaging completion
+  # which would result in the tipi.build customer not having a working installation
+  $env:TIPI_INSTALL_SYSTEM = "True"
+  Write-Output "Installing tipi in system install mode: $env:TIPI_INSTALL_SYSTEM"
 
-    # set the TIPI_HOME_DIR during privisioning
-    $env:TIPI_HOME_DIR = $provisioningTimeTarget
-    $env:TIPI_DISTRO_MODE = $distro_mode
+  # have the target folder created and read/writable for everyone
+  $provisioningTimeTarget = "C:\.tipi"
+  mkdir $provisioningTimeTarget
+  icacls $provisioningTimeTarget /grant Users:F
 
-    # have the target folder created and read/writable for everyone
-    md $provisioningTimeTarget
-    icacls $provisioningTimeTarget /grant Users:F
+  # we need that for a few more days I guess
+  $env:TIPI_HOME_DIR = $provisioningTimeTarget
 
-    # install tipi
-    . { iwr -useb https://raw.githubusercontent.com/tipi-build/cli/master/install/install_for_windows.ps1 } | iex
+  # install tipi
+  . { Invoke-WebRequest -useb https://raw.githubusercontent.com/tipi-build/cli/master/install/install_for_windows.ps1 } | Invoke-Expression
 
-    # set the TIPI_HOME_DIR to our runtime target directory and setup file-sync
-    [System.Environment]::SetEnvironmentVariable('TIPI_HOME_DIR', $runtimeTimeTarget, [System.EnvironmentVariableTarget]::Machine)
-
-    # schedule a job to sync stuff between the c: and d: drive after startup
-    $taskTrigger = New-ScheduledTaskTrigger -AtStartup
-    $taskUser = "NT AUTHORITY\SYSTEM"
-    $taskAction = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-file c:\Temp\sync-tipi-distro.ps1"
-    $taskPriority = 1 # 0: "realtime" / 1: highest prio ... 9: lowest    
-    $taskSettings = New-ScheduledTaskSettingsSet -Priority $taskPriority
-    Register-ScheduledTask -TaskName "tipi-distro-sync" -Trigger $taskTrigger -User $taskUser -Action $taskAction -Settings $taskSettings -RunLevel Highest -Force
-
-    # clean up the download folder to have less clutter
-    Remove-Item -Recurse -Force "$provisioningTimeTarget\downloads\*"
+  try {
+    # clean up the download folder to have less clutter / smaller images
+    Get-ChildItem "$provisioningTimeTarget\downloads\*" -Recurse -Force `
+    | Sort-Object -Property FullName -Descending `
+    | ForEach-Object {
+      Remove-Item -Path $_.FullName -Force -ErrorAction Stop;
+    }
+  }
+  catch {
+    Write-Host " XXX Failed to clean download folder"
+    Write-Host ($_ | ConvertTo-Json)  -ErrorAction Continue
+  }
 
 } Catch {
-    Write-Error "Failed to install tipicli :'("
-    $host.SetShouldExit(-1)
-    throw
+  Write-Error "Failed to install tipicli :'(" -ErrorAction Continue
+  Write-Error ($_ | ConvertTo-Json) -ErrorAction Continue
+  $host.SetShouldExit(-1)
+  throw
 }
 
 Write-Output "Installed tipicli."
