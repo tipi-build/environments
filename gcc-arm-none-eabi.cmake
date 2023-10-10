@@ -16,7 +16,7 @@ include("${CMAKE_CURRENT_LIST_DIR}/utilities/polly_init.cmake")
 if(WIN32)
 	polly_init(
 	    "None / gcc / arm"
-	    "MinGW Makefiles"
+		"Ninja"
 	)
 
 	# on windows we need to specify a .exe suffix for all tools 
@@ -25,7 +25,7 @@ if(WIN32)
 else()
     polly_init(
 	    "None / gcc / arm"
-	    "Unix Makefiles"
+		"Ninja"
 	)
 
 	set(CROSS_COMPILE_TOOLCHAIN_EXECUTABLE_SUFFIX "" )
