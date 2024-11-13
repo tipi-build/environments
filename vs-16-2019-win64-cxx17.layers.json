@@ -1,0 +1,10 @@
+[
+  "!**",
+  "vs-16-2019*",
+  "vs-16-2019.pkr.js/**",
+  "bin/**",
+  "compiler/cl.cmake",
+  "os/windows-10.cmake",
+  "flags/vs*",
+  "utilities/**"
+]

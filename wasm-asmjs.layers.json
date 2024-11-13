@@ -1,0 +1,11 @@
+[
+    "!**",
+    "wasm.cmake",
+    "wasm-*.cmake",
+    "wasm.pkr.js",
+    "bin/**",
+    "compiler/**",
+    "find/**",
+    "flags/**",
+    "utilities/**"
+]

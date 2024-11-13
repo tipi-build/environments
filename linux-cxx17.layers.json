@@ -1,0 +1,10 @@
+[
+    "!**",
+    "linux-cxx17.cmake",
+    "linux.pkr.js",
+    "bin/**",
+    "compiler/**",
+    "find/**",
+    "flags/**",
+    "utilities/**"
+]

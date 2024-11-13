@@ -1,0 +1,11 @@
+[
+    "!**",
+    "macos.cmake",
+    "macos-*.cmake",
+    "macos.pkr.js/**",
+    "bin/**",
+    "compiler/**",
+    "find/**",
+    "flags/**",
+    "utilities/**"
+]

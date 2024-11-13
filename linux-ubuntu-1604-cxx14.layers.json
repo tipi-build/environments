@@ -1,0 +1,10 @@
+[
+    "!**",
+    "linux-ubuntu-1604*.cmake",
+    "linux-ubuntu-1604.pkr.js",
+    "bin/**",
+    "compiler/**",
+    "find/**",
+    "flags/**",
+    "utilities/**"
+]
