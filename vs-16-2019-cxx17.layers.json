@@ -1,5 +1,7 @@
 [
+  "!**",
   "vs-16-2019-win64-cxx17.cmake",
+  "build_engine_mapping.json",
   "compiler/*",
   "flags/*",
   "library/*",
