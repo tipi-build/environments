@@ -1,0 +1,8 @@
+[
+  "clang-cxx17.cmake",
+  "compiler/*",
+  "flags/*",
+  "library/*",
+  "os/*",
+  "utilities/*"
+]

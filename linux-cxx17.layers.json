@@ -1,0 +1,8 @@
+[
+  "linux-cxx17.cmake",
+  "compiler/*",
+  "flags/*",
+  "library/*",
+  "os/*",
+  "utilities/*"
+]
