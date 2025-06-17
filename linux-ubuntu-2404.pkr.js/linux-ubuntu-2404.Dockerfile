@@ -9,7 +9,7 @@ COPY /tipi-linux-x86_64.zip .
 ARG DEBIAN_FRONTEND=noninteractive # avoid tzdata asking for configuration
 # Install tipi and cmake-re
 RUN apt update -y && apt install -y curl gettext
-RUN curl -fsSL https://raw.githubusercontent.com/tipi-build/cli/3b7886d33073bbc8800fc4f8963a9505c18eff7e/install/container/ubuntu.sh -o ubuntu.sh && /bin/bash ubuntu.sh
+RUN curl -fsSL https://raw.githubusercontent.com/tipi-build/cli/21682211bb4353d740ad1c1ffd682d68b6747029/install/container/ubuntu.sh -o ubuntu.sh && /bin/bash ubuntu.sh
 USER tipi
 WORKDIR /home/tipi
 EXPOSE 22
