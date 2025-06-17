@@ -3,14 +3,14 @@
   "builders": [
     {
       "type": "docker",
-      "image": "tipibuild/tipi-ubuntu:{{tipi_cli_version}}",
+      "image": "tipibuild/tipi-ubuntu-wine-msvc:{{tipi_cli_local_version}}",
       "commit": true
     }
   ],
   "post-processors": [
     { 
       "type": "docker-tag",
-      "repository": "linux",
+      "repository": "linux-wine-msvc",
       "tag": "latest"
     }
   ]
