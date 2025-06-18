@@ -3,7 +3,7 @@
   "builders": [
     {
       "type": "docker",
-      "image": "tipibuild/tipi-ubuntu-2404:{{tipi_cli_local_version}}",
+      "image": "tipibuild/tipi-linux-custom:{{tipi_cli_local_version}}",
       "commit": true
     }
   ],
