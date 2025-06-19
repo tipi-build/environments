@@ -3,7 +3,7 @@
   "builders": [
     {
       "type": "docker",
-      "image": "tipibuild/tipi-ubuntu:{{tipi_cli_local_version}}",
+      "image": "tipibuild/tipi-ubuntu:{{cmake_re_source_hash}}",
       "commit": true
     }
   ],
@@ -14,7 +14,4 @@
       "tag": "latest"
     }
   ]
-  ,"_tipi_version":"{{tipi_version_hash}}"
-
-
 }

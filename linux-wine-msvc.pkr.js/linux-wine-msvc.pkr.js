@@ -3,7 +3,7 @@
   "builders": [
     {
       "type": "docker",
-      "image": "tipibuild/tipi-ubuntu-wine-msvc:{{tipi_cli_local_version}}",
+      "image": "tipibuild/tipi-ubuntu-wine-msvc:{{cmake_re_source_hash}}",
       "commit": true
     }
   ],
@@ -14,7 +14,4 @@
       "tag": "latest"
     }
   ]
-  ,"_tipi_version":"{{tipi_version_hash}}"
-
-
 }
