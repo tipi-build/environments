@@ -3,7 +3,7 @@
   "builders": [
     {
       "type": "docker",
-      "image": "tipibuild/linux-custom-almalinux-95:{{cmake_re_source_hash}}",
+      "image": "linux-custom-almalinux-95:{{cmake_re_source_hash}}",
       "commit": true
     }
   ],

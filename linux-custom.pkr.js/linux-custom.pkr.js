@@ -3,7 +3,7 @@
   "builders": [
     {
       "type": "docker",
-      "image": "tipibuild/tipi-linux-custom:{{cmake_re_source_hash}}",
+      "image": "linux-custom:{{cmake_re_source_hash}}",
       "commit": true
     }
   ],
