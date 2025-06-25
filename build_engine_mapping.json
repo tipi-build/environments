@@ -1,4 +1,6 @@
 {
   "vs-15-2017-win64-cxx17" : "Visual Studio 15 2017 Win64",
-  "vs-16-2019-win64-cxx17" : "Visual Studio 16 2019"
+  "vs-16-2019-win64-cxx17" : "Visual Studio 16 2019",
+  "vs-17-2022-win64-cxx17" : "Visual Studio 17 2022"
+
 }
