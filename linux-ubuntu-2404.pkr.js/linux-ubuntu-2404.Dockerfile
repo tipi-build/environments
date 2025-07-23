@@ -4,7 +4,7 @@ FROM ${UBUNTU_24_04}
 ENV TIPI_DISTRO_MODE=all
 ENV TIPI_INSTALL_LEGACY_PACKAGES=OFF
 ENV TIPI_INSTALL_SOURCE=file:///tipi-linux-x86_64.zip
-COPY /tipi-linux-x86_64.zip .
+COPY --from=tipi /tipi-linux-x86_64.zip .
 
 ARG DEBIAN_FRONTEND=noninteractive # avoid tzdata asking for configuration
 # Install tipi and cmake-re
