@@ -3,7 +3,7 @@ FROM ${UBUNTU_20_04}
 
 ENV TIPI_DISTRO_MODE=all
 ENV TIPI_INSTALL_LEGACY_PACKAGES=ON
-COPY /tipi-linux-x86_64.zip .
+COPY --from=tipi /tipi-linux-x86_64.zip .
 ENV TIPI_INSTALL_SOURCE=file:///tipi-linux-x86_64.zip
 
 ARG DEBIAN_FRONTEND=noninteractive # avoid tzdata asking for configuration

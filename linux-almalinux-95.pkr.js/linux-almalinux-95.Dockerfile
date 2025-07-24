@@ -6,7 +6,7 @@ ENV TIPI_DISTRO_MODE=all
 ENV TIPI_INSTALL_LEGACY_PACKAGES=ON
 ENV SUDO_GROUP=wheel
 ENV TIPI_INSTALL_SOURCE=file:///tipi-linux-x86_64.zip
-COPY /tipi-linux-x86_64.zip .
+COPY --from=tipi /tipi-linux-x86_64.zip .
 RUN curl -fsSL https://raw.githubusercontent.com/tipi-build/cli/c14014db11342118f65ef95520a70f43c17ca453/install/container/centos.sh -o centos.sh && /bin/bash centos.sh
 
 USER tipi
