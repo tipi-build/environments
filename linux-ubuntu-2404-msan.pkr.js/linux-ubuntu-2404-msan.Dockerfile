@@ -36,14 +36,19 @@ RUN PATH=`tipi run printenv PATH` cmake  \
   ldconfig && \
   rm -rf /llvm-project/build 
 
+RUN apt-get remove -y g++ 
+
 # MSAN Clang 20 libcxx
 # Installs instrumented libc++.so alongside non-instrumented one (in /usr/local) so that the compiler can run at full speed with MSAN instrumentation
 # 
 # To enable binary instrumentation, link them with /usr/local/lib/libc++.so
 #
-RUN PATH=`tipi run printenv PATH` -DCMAKE_BUILD_TYPE=Release \
+RUN PATH=`tipi run printenv PATH` cmake -DCMAKE_BUILD_TYPE=Release \
+    -G Ninja \
     -S /llvm-project/runtimes \
     -B /llvm-project/build-msan \
+    -DCMAKE_CXX_COMPILER=/usr/bin/clang++ \
+    -DCMAKE_C_COMPILER=/usr/bin/clang \
     -DCMAKE_INSTALL_PREFIX=/usr/local \
     -DLLVM_USE_SANITIZER=MemoryWithOrigins \
     -DLLVM_ENABLE_RUNTIMES='libcxx;libcxxabi' \

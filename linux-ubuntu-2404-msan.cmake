@@ -20,17 +20,11 @@ add_link_options($<$<COMPILE_LANGUAGE:C,CXX>:-stdlib=libc++>)
 #############################################
 # MSAN settings
 
-# Find the msan ignore list file
-set(SANITIZER_IGNORELIST_PATH "${CMAKE_CURRENT_LIST_DIR}/../msan.ignore")
-if(NOT EXISTS "${SANITIZER_IGNORELIST_PATH}")
-    message(FATAL_ERROR "Failed to find MSAN Ignorelist at path ${SANITIZER_IGNORELIST_PATH}")
-endif()
-
 # linux-ubuntu-2404-msan.sanitize-ignorelist
-cmake_path(GET CMAKE_CURRENT_LIST_FILE FILENAME msan_ignore_list_path)
-set(msan_ignore_list_path "${msan_ignore_list_path}.sanitize-ignorelist")
+cmake_path(GET CMAKE_CURRENT_LIST_FILE STEM msan_ignore_list_path)
+set(msan_ignore_list_path "${CMAKE_CURRENT_LIST_DIR}/${msan_ignore_list_path}.sanitize-ignorelist")
 if(NOT EXISTS "${msan_ignore_list_path}")
-  message(FATAL_ERROR "Failed to find sanitizer ignore list")
+  message(FATAL_ERROR "Failed to find sanitizer ignore list at path ${msan_ignore_list_path}")
 endif()
 
 # Compilation and linker flags to ensure proper sanitizer support
