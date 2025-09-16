@@ -8,6 +8,7 @@ else()
 endif()
 
 include("${CMAKE_CURRENT_LIST_DIR}/polly_fatal_error.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/polly_status_print.cmake")
 
 macro(polly_init name generator)
   set(POLLY_TOOLCHAIN_NAME "${name}")
@@ -17,7 +18,7 @@ macro(polly_init name generator)
 
   string(COMPARE EQUAL "${CMAKE_GENERATOR}" "${generator}" _polly_correct)
   if(NOT _polly_correct)
-    polly_fatal_error(
+    polly_status_print(
         "Please change generator to: ${generator}\n"
         "(Current generator: ${CMAKE_GENERATOR})"
     )
