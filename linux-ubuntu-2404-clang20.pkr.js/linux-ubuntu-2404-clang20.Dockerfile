@@ -59,3 +59,5 @@ RUN mkdir -p /llvm-project && \
   rm -rf /llvm-project/
 
 ENV MSAN_SYMBOLIZER_PATH=/usr/bin/llvm-symbolizer
+
+RUN sudo apt-get update -y && sudo apt-get install -y valgrind
