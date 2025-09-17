@@ -1,2 +1,2 @@
 // Generated File DO NOT MANUALLY EDIT, this file SHOULD be commited to version control system
-{"image_base_name":"tipibuild/tipi-ubuntu-2404-clang20","manifest_digest":"sha256:65dbc52d2e2372bd18bfa825ceaed4bfd6951bce4046e62bfcddd83011bd97ee","platform":"linux/amd64","raw_envzip_hash":"4c817adaba260e0786b8ebaa8f9e4d64fc47a55d"}
+{"image_base_name":"tipibuild/tipi-ubuntu-2404-clang20","manifest_digest":"sha256:a71bcf0207c62e24ec4ce142356270a4c9458ca58fce908510412971eafd04f4","platform":"linux/amd64","raw_envzip_hash":"9050e5ddb8c06f558f7ca1837f8e446446165347"}

@@ -3,7 +3,7 @@ FROM ${UBUNTU_24_04}
 MAINTAINER tipi.build by EngFlow
 
 # Install base tooling
-RUN apt-get update -y && apt-get install -y gcc g++ make unzip curl wget build-essential gettext autoconf
+RUN apt-get update -y && apt-get install -y gcc g++ make unzip curl wget build-essential gettext autoconf libbz2-dev xz-utils zlib1g-dev libzstd-dev
 
 # Install tipi and cmake-re
 ENV TIPI_INSTALL_VERSION=v0.0.77
@@ -23,6 +23,8 @@ RUN mkdir -p /llvm-project && \
     -GNinja \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
+    -DLLVM_ENABLE_ZLIB=FORCE_ON \
+    -DLLVM_ENABLE_ZSTD=FORCE_ON \
     -DLLVM_ENABLE_PROJECTS='clang;clang-tools-extra;polly;compiler-rt' \
     -DLLVM_ENABLE_RUNTIMES='libcxx;libcxxabi;libunwind' \
     -DLIBCXXABI_USE_LLVM_UNWINDER=YES \
