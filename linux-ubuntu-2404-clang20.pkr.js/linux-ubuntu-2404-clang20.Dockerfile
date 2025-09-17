@@ -18,9 +18,8 @@ EXPOSE 22
 
 # Standard Clang 20
 RUN mkdir -p /llvm-project && \
-  git clone --branch llvmorg-20.1.2 --depth 1 https://github.com/llvm/llvm-project.git /llvm-project
-
-RUN PATH=`tipi run printenv PATH` cmake  \
+  git clone --branch llvmorg-20.1.2 --depth 1 https://github.com/llvm/llvm-project.git /llvm-project && \
+  PATH=`tipi run printenv PATH` cmake  \
     -GNinja \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
@@ -34,7 +33,7 @@ RUN PATH=`tipi run printenv PATH` cmake  \
   PATH=`tipi run printenv PATH` cmake --build /llvm-project/build --target install && \
   echo "/usr/lib/x86_64-unknown-linux-gnu" > /etc/ld.so.conf.d/clang.conf && \
   ldconfig && \
-  rm -rf /llvm-project/build 
+  rm -rf /llvm-project/
 
 RUN apt-get remove -y g++ 
 
@@ -43,20 +42,20 @@ RUN apt-get remove -y g++
 # 
 # To enable binary instrumentation, link them with /usr/local/lib/libc++.so
 #
-RUN PATH=`tipi run printenv PATH` cmake -DCMAKE_BUILD_TYPE=Release \
+RUN mkdir -p /llvm-project && \
+  git clone --branch llvmorg-20.1.2 --depth 1 https://github.com/llvm/llvm-project.git /llvm-project && \
+  PATH=`tipi run printenv PATH` cmake  \
+    -DCMAKE_BUILD_TYPE=Release \
     -G Ninja \
     -S /llvm-project/runtimes \
     -B /llvm-project/build-msan \
     -DCMAKE_CXX_COMPILER=/usr/bin/clang++ \
     -DCMAKE_C_COMPILER=/usr/bin/clang \
-    -DCMAKE_INSTALL_PREFIX=/usr/local \
+    -DCMAKE_INSTALL_PREFIX=/usr/local/instrumented/msan \
     -DLLVM_USE_SANITIZER=MemoryWithOrigins \
     -DLLVM_ENABLE_RUNTIMES='libcxx;libcxxabi' \
     -DLIBCXXABI_USE_LLVM_UNWINDER=Off && \
   PATH=`tipi run printenv PATH` cmake --build /llvm-project/build-msan --target install && \
-  rm -rf /llvm-project/runtimes
-
-RUN rm -r -f /llvm-project
+  rm -rf /llvm-project/
 
 ENV MSAN_SYMBOLIZER_PATH=/usr/bin/llvm-symbolizer
-
