@@ -1,0 +1,10 @@
+[
+  "!**",
+  "linux-cxx17.cmake",
+  "linux-cxx17-static.cmake",
+  "compiler/*",
+  "flags/*",
+  "library/*",
+  "os/*",
+  "utilities/*"
+]
