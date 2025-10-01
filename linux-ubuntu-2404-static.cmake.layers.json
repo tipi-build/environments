@@ -1,7 +1,6 @@
 [
-  "!**",
-  "linux-cxx17.cmake",
-  "linux-cxx17-static.cmake",
+  "!linux-*/**",
+  "linux-ubuntu2404*",
   "compiler/*",
   "flags/*",
   "library/*",
