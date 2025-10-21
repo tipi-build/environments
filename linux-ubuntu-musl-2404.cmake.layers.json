@@ -1,0 +1,6 @@
+[
+  "!linux-*/**",
+  "linux-ubuntu-musl-2404*",
+  "flags/*.cmake",
+  "utilities/*.cmake"
+]
