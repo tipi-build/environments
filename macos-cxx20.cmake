@@ -18,3 +18,5 @@ include("${CMAKE_CURRENT_LIST_DIR}/utilities/polly_common.cmake")
 
 include("${CMAKE_CURRENT_LIST_DIR}/compiler/clang.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/flags/cxx20.cmake")
+
+set(CMAKE_OSX_DEPLOYMENT_TARGET 13.0)
