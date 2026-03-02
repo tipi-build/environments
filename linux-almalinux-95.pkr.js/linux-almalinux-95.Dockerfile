@@ -8,7 +8,7 @@ ENV SUDO_GROUP=wheel
 ENV TIPI_INSTALL_SOURCE=file:///tipi-linux-x86_64.zip
 COPY --from=tipi /tipi-linux-x86_64.zip .
 RUN yum update -y && yum install -y ca-certificates 
-RUN curl -fsSL https://raw.githubusercontent.com/tipi-build/cli/4d3116738b96de360fb5cd7653472b041bca3de1/install/container/centos.sh -o centos.sh && /bin/bash centos.sh
+RUN curl -fsSL https://raw.githubusercontent.com/tipi-build/cli/2f7d8734e05c0cb6dd23bbdd27234c75676bac1e/install/container/centos.sh -o centos.sh && /bin/bash centos.sh
 
 USER tipi
 WORKDIR /home/tipi

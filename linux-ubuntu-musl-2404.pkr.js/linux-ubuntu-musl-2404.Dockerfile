@@ -119,7 +119,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   gettext \
   && rm -rf /var/lib/apt/lists/*
 # Install script for v0.0.80
-RUN curl -fsSL https://raw.githubusercontent.com/tipi-build/cli/11469c0ac2612565000444950cf0e8dcdd827657/install/container/ubuntu.sh -o ubuntu.sh && /bin/bash ubuntu.sh
+RUN curl -fsSL https://raw.githubusercontent.com/tipi-build/cli/2f7d8734e05c0cb6dd23bbdd27234c75676bac1e/install/container/ubuntu.sh -o ubuntu.sh && /bin/bash ubuntu.sh
 
 # Configure tipi user
 USER tipi

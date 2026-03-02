@@ -16,5 +16,5 @@ COPY ./pam-config/pam.d/su /etc/pam.d/
 COPY ./pam-config/pam.d/su-l /etc/pam.d/
 
 RUN apt update -y && apt install -y curl gettext
-RUN curl -fsSL https://raw.githubusercontent.com/tipi-build/cli/4d3116738b96de360fb5cd7653472b041bca3de1/install/container/ubuntu.sh -o ubuntu.sh && /bin/bash ubuntu.sh
+RUN curl -fsSL https://raw.githubusercontent.com/tipi-build/cli/2f7d8734e05c0cb6dd23bbdd27234c75676bac1e/install/container/ubuntu.sh -o ubuntu.sh && /bin/bash ubuntu.sh
 EXPOSE 22
