@@ -23,7 +23,7 @@ set(CMAKE_C_COMPILER_TARGET "x86_64-unknown-linux-musl")
 set(CMAKE_CXX_COMPILER_TARGET "x86_64-unknown-linux-musl")
 
 include("${CMAKE_CURRENT_LIST_DIR}/flags/cxx17.cmake")
-
+set(BUILD_SHARED_LIBS OFF)
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
 
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM BOTH)
