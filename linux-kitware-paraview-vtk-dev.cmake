@@ -1,0 +1,20 @@
+include_guard()
+
+if (NOT CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux") 
+  message(FATAL_ERROR "Incompatible System Toolchain, you are running the build on '${CMAKE_HOST_SYSTEM_NAME}' and this toolchain is made for 'Linux'.")
+endif()
+
+include("${CMAKE_CURRENT_LIST_DIR}/compiler/clang-no-polly.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/flags/fpic.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/generator/ninja.cmake")
+
+set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "" FORCE)
+set(VTK_WRAP_PYTHON ON CACHE BOOL "" FORCE)
+set(VTK_DEBUG_LEAKS ON CACHE BOOL "" FORCE)
+set(VTK_BUILD_TESTING "WANT" CACHE STRING "" FORCE)
+set(VTK_USE_MPI ON CACHE BOOL "" FORCE)
+set(VTK_EXTRA_COMPILER_WARNINGS ON CACHE BOOL "" FORCE)
+set(VTK_BUILD_EXAMPLES ON CACHE BOOL "" FORCE)
+set(VTK_ENABLE_EXTRA_BUILD_WARNINGS ON CACHE BOOL "" FORCE)
+set(VTK_GENERATE_SPDX ON CACHE BOOL "" FORCE)
+set(VTK_LINKER_FATAL_WARNINGS ON CACHE BOOL "" FORCE)
