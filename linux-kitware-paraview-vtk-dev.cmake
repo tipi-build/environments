@@ -7,6 +7,7 @@ endif()
 include("${CMAKE_CURRENT_LIST_DIR}/compiler/clang-no-polly.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/flags/fpic.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/generator/ninja.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/linker/ldd.cmake")
 
 set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "" FORCE)
 set(VTK_WRAP_PYTHON ON CACHE BOOL "" FORCE)
