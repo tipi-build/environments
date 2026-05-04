@@ -3,7 +3,7 @@
   "builders": [
     {
       "type": "docker",
-      "image": "tipibuild/tipi-ubuntu-2404@sha256:d2934dcd46825cf97424e1a587007e71033b78299f6bd0c0a563c34c20ebef13",
+      "image": "tipibuild/tipi-ubuntu-2404@sha256:29ffeb7fdb551eb289775098abe0ba0699bfcd654049ee51cb978c6b2c0361e7",
       "commit": true
     }
   ]
