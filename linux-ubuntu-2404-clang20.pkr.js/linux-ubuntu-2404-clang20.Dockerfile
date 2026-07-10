@@ -6,9 +6,9 @@ MAINTAINER tipi.build by EngFlow
 RUN apt-get update -y && apt-get install -y gcc g++ make unzip curl wget build-essential gettext autoconf libbz2-dev xz-utils zlib1g-dev libzstd-dev
 
 # Install tipi and cmake-re
-ENV TIPI_INSTALL_VERSION=v0.0.77
-# dfb217a08ced7143d9e6603f565d7d1ce3d9f26d == v0.0.77
-RUN curl -fsSL https://github.com/tipi-build/cli/raw/dfb217a08ced7143d9e6603f565d7d1ce3d9f26d/install/container/ubuntu.sh -o ubuntu.sh && /bin/bash ubuntu.sh
+ENV TIPI_INSTALL_VERSION=v0.0.86
+# 57fe06218a15ef25764883a64f75a68e7636df9b == v0.0.86
+RUN curl -fsSL https://github.com/tipi-build/cli/raw/57fe06218a15ef25764883a64f75a68e7636df9b/install/container/ubuntu.sh -o ubuntu.sh && /bin/bash ubuntu.sh
 
 RUN chmod 777 /usr/local/share/.tipi/.distro.mode \
   && chmod -R 777 /usr/local/share/.tipi
