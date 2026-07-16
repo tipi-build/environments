@@ -5,16 +5,14 @@ MAINTAINER tipi.build by EngFlow
 # Install base tooling
 RUN apt-get update -y && apt-get install -y gcc g++ make unzip curl wget build-essential gettext autoconf libbz2-dev xz-utils zlib1g-dev libzstd-dev
 
-# Install tipi and cmake-re
-ENV TIPI_INSTALL_VERSION=v0.0.86
-# 57fe06218a15ef25764883a64f75a68e7636df9b == v0.0.86
+# Install tipi and cmake-re from just-build cmake-re via env:TIPI_CONTAINER_BUILD_ADDITIONAL_PARAMETERS: "--build-context tipi=${{ github.workspace }}/container-build/additional-docker-context"
+COPY --from=tipi /tipi-linux-x86_64.zip .
+ENV TIPI_INSTALL_SOURCE=file:///tipi-linux-x86_64.zip
 RUN curl -fsSL https://github.com/tipi-build/cli/raw/57fe06218a15ef25764883a64f75a68e7636df9b/install/container/ubuntu.sh -o ubuntu.sh && /bin/bash ubuntu.sh
+EXPOSE 22
 
 RUN chmod 777 /usr/local/share/.tipi/.distro.mode \
   && chmod -R 777 /usr/local/share/.tipi
-
-EXPOSE 22
-
 
 # Standard Clang 20
 RUN mkdir -p /llvm-project && \
