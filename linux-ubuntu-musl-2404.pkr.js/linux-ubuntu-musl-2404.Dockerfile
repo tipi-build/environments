@@ -34,7 +34,7 @@ RUN mkdir /sources
 
 WORKDIR /sources
 RUN git clone https://github.com/llvm/llvm-project.git --recurse-submodules --shallow-submodules --depth=1 --branch ${LLVM_VERSION}
-RUN git clone https://git.musl-libc.org/git/musl --recurse-submodules --shallow-submodules --depth=1 --branch ${MUSL_VERSION}
+RUN git clone https://github.com/nxxm/musl.git --recurse-submodules --shallow-submodules --depth=1 --branch ${MUSL_VERSION}
 RUN git clone https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git --depth=1 --branch=${LINUX_VERSION}
 
 # Install the musl headers and libs, built with host clang
